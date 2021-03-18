@@ -1,0 +1,14 @@
+/*This css files will help to style footer.ejs*/
+
+.footer {
+    position: relative;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      /* background-color:#343A40; */
+      background-color: rgba(242,141,112,0.82)  ;
+      color: #fff;
+      text-align: center;
+      padding:1%;
+      margin-top:10px ;
+    }
