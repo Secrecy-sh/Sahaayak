@@ -17,6 +17,10 @@ app.get("/",(req,res)=>{
     res.render('frontpage',{});
 })
 
+app.get('/admin-panel', (req, res, next) => {
+    res.render('admin-login', {auth:true});
+});
+
 app.get('/sign-in', (req, res) => {
     res.render('sign-in', {auth:true});
 });
