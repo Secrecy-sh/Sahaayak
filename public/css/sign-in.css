@@ -1,0 +1,14 @@
+.customsignin{
+    height:89.5%;
+    background-image:url('/images/bg8.jpg');
+    color:#fff;
+}
+#inputEmail,#inputPassword {
+    background: none;
+    width: 70%;
+    color: white;
+}
+
+#inputEmail::placeholder,#inputPassword::placeholder {
+    color: white;
+}
