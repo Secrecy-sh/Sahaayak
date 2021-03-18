@@ -1,5 +1,6 @@
 const express=require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
 const path = require('path');
 const app = express();
@@ -28,13 +29,25 @@ mongoose
     console.log('not connected');
   });
 
-  
+
 app.get("/",(req,res)=>{
     res.render('frontpage',{});
 })
 
 app.get('/admin-panel', (req, res, next) => {
     res.render('admin-login', {auth:true});
+});
+
+app.post('/admin-login', (req, res, next) => {
+    var adminEmail = req.body.usremail;
+    var adminPassword = req.body.usrpsw;
+    console.log(req.body)
+    if (adminEmail === 'nlok5923@gmail.com' && adminPassword === '123') {
+      res.render('admin-panel', {});
+    } else {
+    //   var userVerified = false;
+      res.render('admin-login', {auth:false});
+    }
 });
 
 app.post('/admin-login', (req, res, next) => {
