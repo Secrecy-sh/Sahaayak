@@ -1,0 +1,28 @@
+{
+  "name": "sahaayak",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Secrecy-sh/Sahaayak.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Secrecy-sh/Sahaayak/issues"
+  },
+  "homepage": "https://github.com/Secrecy-sh/Sahaayak#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "node-mailer": "^0.1.1"
+  }
+}
