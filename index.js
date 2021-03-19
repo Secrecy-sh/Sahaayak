@@ -154,15 +154,6 @@ app.get("/model/:id",(req,res)=>{
   res.render('notfound',{});
 })
 
-app.get("/model/:id",(req,res)=>{
-  if(req.params.id!="null")
-  res.render('showmodels1',{name:req.params.id});
-  else
-  res.render('notfound',{});
-})
-app.get("/dashboard/generate/add-model/view",async (req,res)=>{
-  res.render('view-ar',{})
-})
 // setted post route checking for correct instructor login 
 app.post('/sign-in', async (req, resp, next) => {
   var usrEmail = req.body.usremail;

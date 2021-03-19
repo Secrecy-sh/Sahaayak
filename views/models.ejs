@@ -174,7 +174,8 @@
                                                     </div>
                                                 </div class="col-sm">
                                                 <a class="btn  btn-rounded btn-md btn-primary text-center"
-                                                    href="<%= model[i].model__url %>">view </a>
+                                                    href="<%= model[i].model__url %>"
+                                                    target="_blank">view </a>
 
                                             </div>
                                 </div>
@@ -223,9 +224,9 @@
                                                                 lecture</a>
                                                         </div>
                                                     </div class="col-sm">
-                                                    <% src="/dashboard/generate/add-model/view" %>
+                                                    <% src = "/model/"+ three__models[k] %>
                                                         <a class="btn  btn-rounded btn-md btn-primary text-center"
-                                                            href="<%= src %>">view </a>
+                                                            href="<%= src %>" target="_blank">view </a>
 
                                                 </div>
                                     </div>
