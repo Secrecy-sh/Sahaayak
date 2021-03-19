@@ -67,10 +67,6 @@ mongoose
     console.log('not connected');
   });
 
-  app.get("/",(req,res)=>{
-    res.render('frontpage',{});
-  })
-
 
 
 // this function help us to make a random string of n length
@@ -140,7 +136,7 @@ return "biology";
 return "";
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // setted get request for testing if pages are rendering properly or not 
 app.get('/sign-in', (req, res) => {
     res.render('sign-in', {auth:true});
@@ -153,6 +149,7 @@ app.get("/model/:id",(req,res)=>{
   else
   res.render('notfound',{});
 })
+
 
 // setted post route checking for correct instructor login 
 app.post('/sign-in', async (req, resp, next) => {
@@ -479,11 +476,66 @@ app.post('/admin-login', (req, res, next) => {
 });
 
 //* Adding get request path for Team Page
+app.get("/team",(req,res)=>{
+  res.render('team',{})
+});
 
 //temporary route to display success page
 app.get("/success",(req,res)=>{
   res.render('Success',{})
 })
+
+//this route will handle all delete request
+//handling query delete request 
+
+//handing doubt request 
+app.post("/query",async (req,res)=>{
+  //insdbtmail : insturctor to whom we send raised dbt
+  var query_id = await makeid(6);
+  
+  var nowDate = new Date(); 
+  var date = nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate(); 
+  var doubt = `<h3>Student ${req.body.name} asked this doubt</h3><br><p>${req.body.query}</p><br><p>Reply this mail to ${req.body.email}</p>`;
+  let doubt_data = new query({
+    InstructorEmail: insdbtmail,
+    name: req.body.name,
+    query_text: req.body.query,
+    student_mail : req.body.email,
+    date: date,
+    query_id: query_id
+  })
+  var sampleObj  = await doubt_data.save()
+  .then((doc)=>{
+    console.log("doubt saved",doc)
+  })
+  var transporter = mailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    service: 'gmail',
+    auth: {
+      user: 'techar.service@gmail.com',
+      pass: 'TechAr@9907',
+    },
+  });
+
+ 
+  var mailOptions = {
+    from: 'techar.service@gmail.com',
+    to: insdbtmail,
+    subject: 'Doubt raised for your lecture',
+    html: doubt,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+  res.redirect(`/lecture/${lecture_id}`);
+});
 
 //below routes handle updating lecture feature
 
