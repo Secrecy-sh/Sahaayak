@@ -1,0 +1,304 @@
+<%- include('./Partials/chore.ejs') -%>
+    <link href="css/models.css" rel="stylesheet">
+    <style>
+        .page__holder {
+            width: 100%;
+            /* //currently putting it 90vh */
+            height: 90vh;
+            display: flex;
+            flex-direction: row;
+            /* align-items: center; */
+            /* justify-content: center; */
+        }
+
+        .model__container {
+            width: 78%;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .search__input {
+            /* display: flex; */
+            /* flex-direction: column; */
+            width: 50%;
+            margin-top: 7vh;
+            /* align-items: center; */
+        }
+
+        .search__input input {
+            width: 100%;
+            height: 7vh;
+        }
+
+        .tag__section {
+            width: 21%;
+            position: fixed;
+            left: 78%;
+            height: 100vh;
+            border-left: solid black 2px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tag__head {
+            font-size: 30px;
+        }
+
+        .tag {
+            background-color: rgb(107, 107, 230);
+            display: inline;
+            margin-left: 10px;
+            border-radius: 5px;
+            line-height: 45px;
+            position: relative;
+            padding: 10px 10px 10px 10px;
+            color: white;
+        }
+
+        .tag a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .search__label {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .search__input input {
+            font-size: 20px;
+        }
+
+        .customheading {
+            margin-bottom: 150px;
+            margin-left: auto;
+        }
+
+        .upload__head {
+            font-size: 25px;
+        }
+
+        .tag-container {
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            min-height: 200px;
+            max-height: 500px;
+        }
+    </style>
+    <div class="page__holder">
+        <div class="tag__section">
+            <div class="tag-container">
+                <div class="all-tags">
+                    <h1 class="text-center tag__head font-weight-bold"> Search by tags</h1>
+                    <% for(var i=0;i<model.length;i++) {%>
+                        <div class="tag">
+                            <% link="#" + model[i].model__name %>
+                                <a href="<%= link %>">
+                                    <%= model[i].model__name %>
+                                </a>
+                        </div>
+                        <% }%>
+                            <% for(var l=0;l<three__models.length;l++) {%>
+                                <div class="tag">
+                                    <% link="#" + three__models[l] %>
+                                        <a href="<%= link %>">
+                                            <%= three__models[l] %>
+                                        </a>
+                                </div>
+                                <% }%>
+                </div>
+            </div>
+            <div class="custom-model text-center">
+                <h1 class="text-center upload__head"> Upload your own models only(.glb) </h1>
+                <form action="/custom/uploadmodel" method="post" class="text-center" enctype="multipart/form-data">
+                    <input type="file" class="form-control" name="modelTesting">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary text-center">Upload</button>
+                    </div>
+                </form>
+                <h6>Note* You can use this to convert model of any format to glb <a
+                        href="https://anyconv.com/fbx-to-glb-converter/" target="_blank">Use it</a></h6>
+            </div>
+        </div>
+
+        <div class="model__container">
+
+            <div class="search__input">
+                <label for="search" class="search__label">Search</label>
+                <input type="text" placeholder="enter model name " class="form-group" id="search_bar"
+                    onkeyup="search()"></input>
+            </div>
+            <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Zeehq1KG2a0ZVemWuvlxXQi1gbT3Jzi6pg&usqp=CAU -->
+            <div class="container mt-5 text-center container-cards">
+                <!-- <h1 class="text-center"> <%= model.length %> </h1> -->
+                <button class="btn btn-primary" onclick="modelsDispatch()">Add all selected models </button>
+                <h1 class="text-center font-weight-bold"> Select Among echoar models </h1>
+                <div class="row ">
+                    <% for(var i=0;i<model.length;i++) {%>
+
+                        <div class="col-md-4">
+                            <div class="card stylecard mt-3 mycard">
+
+                                <div class="view overlay">
+                                    <!-- <a class="btn btn-rounded btn-md btn-primary edit__btn btn-circle btn-sm" >E</a>  -->
+                                    <img class="card-img-top"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Zeehq1KG2a0ZVemWuvlxXQi1gbT3Jzi6pg&usqp=CAU"
+                                        alt="Card image cap">
+                                    <a>
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+
+
+                                <div class="card-body">
+
+                                    <!-- Title -->
+                                    <h3 class="card-title text-center text-capitalize cardtitle">
+                                        <%= model[i].model__name %>
+                                            </h4>
+                                            <hr>
+                                            <!-- Text -->
+                                            <p class="card-text set-width">Press Button below to add it in your lecture
+                                                and see the change of education in future</p>
+                                            <div class="text-center">
+
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                        <a class="btn  btn-rounded btn-md btn-primary text-center"
+                                                            id="<%= model[i].model__url %>"
+                                                            onclick="addModels('<%= model[i].model__url %>')">Add to
+                                                            lecture</a>
+                                                    </div>
+                                                </div class="col-sm">
+                                                <a class="btn  btn-rounded btn-md btn-primary text-center"
+                                                    href="<%= model[i].model__url %>">view </a>
+
+                                            </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+                <div class="container mt-5 text-center container-cards">
+
+                    <h1 class="text-center font-weight-bold"> Select Among three models </h1>
+                    <div class="row">
+                        <% for(var k=0;k<three__models.length;k++) {%>
+
+                            <div class="col-md-4">
+                                <div class="card stylecard mt-3 mycard">
+
+                                    <div class="view overlay">
+                                        <!-- <a class="btn btn-rounded btn-md btn-primary edit__btn btn-circle btn-sm" >E</a>  -->
+                                        <img class="card-img-top"
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Zeehq1KG2a0ZVemWuvlxXQi1gbT3Jzi6pg&usqp=CAU"
+                                            alt="Card image cap">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
+
+
+                                    <div class="card-body">
+
+                                        <!-- Title -->
+                                        <h3 class="card-title text-center text-capitalize cardtitle">
+                                            <%= three__models[k] %>
+                                                </h4>
+                                                <hr>
+                                                <!-- Text -->
+                                                <p class="card-text set-width">Press Button below to add it in your
+                                                    lecture and see the change of education in future</p>
+                                                <div class="text-center">
+
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            <a class="btn  btn-rounded btn-md btn-primary text-center"
+                                                                id="<%= three__models[k] %>"
+                                                                onclick="addModels('<%= three__models[k] %>')">Add to
+                                                                lecture</a>
+                                                        </div>
+                                                    </div class="col-sm">
+                                                    <% src="/dashboard/generate/add-model/view" %>
+                                                        <a class="btn  btn-rounded btn-md btn-primary text-center"
+                                                            href="<%= src %>">view </a>
+
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    <script>
+        var arr = [];
+        function addModels(model_name) {
+            arr.push(model_name)
+            console.log(model_name)
+            console.log(arr);
+            var changeText = document.getElementById(model_name);
+            changeText.innerHTML = "Added";
+            // }
+        }
+
+        function modelsDispatch() {
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST', '/dashboard/generate/add-model', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            console.log(arr)
+            xhr.send(
+                JSON.stringify({
+                    models_array: arr,
+                    lecture_id: '<%- lecture_id %>'
+                })
+            );
+            // alert("you lecture formed successfully you will be redirected to dashboard shortly ");
+            swal({
+                title: "Good job!",
+                text: "Lecture added successfully",
+                icon: "success",
+                button: "Thanks",
+            });
+            setTimeout(function redirect() {
+                window.location.href = "/dashboard"
+            }, 1000)
+        }
+        async function search() {
+            var input = document.getElementById("search_bar")
+            var filter = input.value.toUpperCase()
+            var main = document.getElementsByClassName('container-cards')
+            console.log(main)
+            console.log(main.length)
+            for (i = 0; i < main.length; i++) {
+                var cards = main[i].getElementsByClassName('mycard')
+                console.log('Card is ', cards)
+                for (k = 0; k < cards.length; k++) {
+                    singlecard = cards[k]
+                    console.log('kth card is', singlecard)
+                    var title = singlecard.getElementsByClassName('cardtitle')[0]
+                    console.log('Title is ', title)
+                    var txtvalue = title.textcontent || title.innerText
+                    console.log(txtvalue)
+                    if (txtvalue.toUpperCase().indexOf(filter) > -1) {
+                        singlecard.style.display = "";
+                    } else {
+                        singlecard.style.display = "none";
+                    }
+                }
+
+            }
+        }
+    </script>
