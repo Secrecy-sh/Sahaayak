@@ -1,0 +1,33 @@
+/*This css files will help to style any file which need less amount of styling */
+.required {
+    color: red;
+}
+
+.not_found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 88vh;
+    width:100%;
+  }
+  .edit__btn {
+    position: absolute;
+    display: block;
+    margin-top: 5%;
+    margin-left: 75%;
+    z-index: 999;
+    border-radius: 1000px;
+  }
+  .btn-circle.btn-sm { 
+    width: 50px; 
+    height: 50px; 
+    padding: 7px 10px; 
+    border-radius: 25px; 
+    font-size: 20px; 
+    text-align: center; 
+  } 
+
+.input__search {
+    background-color: aliceblue;
+    height: 7vh;
+}
