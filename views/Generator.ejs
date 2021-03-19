@@ -110,4 +110,52 @@
     placeholder: 'Create your lecture gist here',
     theme: 'snow',
   });
+
+  async function customSubmit() {
+
+console.log('Triggered');
+let Insemail = document.getElementById('Insemail');
+Insemail = Insemail.value;
+let ltitle = document.getElementById('ltitle');
+ltitle = ltitle.value;
+let note = document.getElementById('note');
+note = note.value;
+let video_url = document.getElementById('video_url');
+video_url = video_url.value;
+let subject = document.getElementById('subject');
+subject_name = subject.value;
+let quillDelta = document.getElementById('editor');
+quillDelta = quillDelta.innerHTML;                  
+var arr = quill.getContents();
+if(Insemail==="" ||ltitle==="" || subject_name===""|| quill.root.innerHTML===""){
+  swal({
+    title: "Ohh no !!",
+    text: "Please fill all field",
+    icon: "error",
+    button: "ok",
+  });
+}
+else {
+var xhr = new XMLHttpRequest();
+//*First generate  then path then option
+xhr.open('POST', '/dashboard/generate', true);
+// Format of data sent ,it tells server or browser type of data to be recieved
+await xhr.setRequestHeader('Content-Type', 'application/json');
+console.log(arr);
+var narr = JSON.stringify(arr, null, 2);
+console.log(narr)
+var resp = await xhr.send(
+  JSON.stringify({
+    value: quill.root.innerHTML,
+    Insemail: Insemail,
+    ltitle: ltitle,
+    note: note,
+    video_url: video_url,
+    subject_name: subject_name,
+    quillDelta: narr
+  })
+);
+window.location.href="/dashboard/generate/add-model"
+}
+}
 </script>
