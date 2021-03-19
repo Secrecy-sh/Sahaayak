@@ -1,0 +1,155 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&family=Sriracha&display=swap');
+*,*::before,*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body
+{
+  background-image: url('/images/Bg4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.colorContainer
+{
+  /* background-color: rgb(4, 52, 141); */
+}
+.extra__margin {
+  margin-top: 5%;
+}
+.heading{
+  /* background-color: rgb(3, 109, 151); */
+  height: 20vh;
+  color:#000;
+  /* background-color: #fff; */
+}
+.heading h1
+{
+  font-size:100px;
+  /* color:#fff; */
+  color:rgb(255, 255, 255);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color:#000;
+  font-weight: bolder;
+  font-family: 'Merriweather', serif;
+}
+.heading h1:hover{
+  transform: scale(1.1);
+  /* transform: translateZ(30px); */
+}
+.row
+{
+  padding-top:20px;
+  padding-bottom: 20px;
+}
+.stylecard
+{
+  min-width:2vw;
+  max-width:40vw;
+  width:20vw;
+  /* width:min-content; */
+  height:auto;
+  margin-top:2.5%;
+  overflow: auto;
+}
+.stylecard:hover{
+  transform: scale(1.1);
+  transform: translate(0px,0px,20px);
+
+}
+
+.container-cards .row
+{
+display: grid;
+grid-template-columns:1fr 1fr 1fr;
+grid-template-rows: auto;
+justify-items: center;
+}
+
+.set-width {
+  white-space: nowrap; 
+  width: 95%; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.not_found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88vh;
+  width:100%;
+}
+
+.form-control {
+  width: 90%;
+}
+
+.btn-size {
+  width: 90%;
+}
+
+.form-signin {
+  width: 40%;
+}
+/*all lectures*/
+.all-lecture {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+}
+.subject__tags {
+  /* background-color: #8E6c90; */
+  width: 300px;
+  margin-top: 7%;
+  position: fixed;
+  left: 81.5%;
+  height: 530px;
+}
+
+.tag__head {
+  font-size: 30px;
+}
+.lecture__cards {
+  width: 80%;
+  margin-left: 1%;
+}
+
+.tag {
+  /* width: 10vh; */
+  display:inline-block;
+  background-color: #222222;
+  margin-left: 10px;
+
+  border-radius: 5px;
+  line-height: 45px;
+  position: relative;
+  color: white;
+  width:80px;
+  height:auto;
+  margin-bottom:4px;
+  height:50px;
+  text-align: center;
+  overflow-x: auto;
+ 
+}
+.tag a{
+  text-decoration: none;
+  color: inherit ;
+}
+
+.align-search {
+  width: 80%;
+  margin-top: 2%;
+  z-index: 9999;
+  position: fixed;
+}
+
