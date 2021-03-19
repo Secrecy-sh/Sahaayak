@@ -1,0 +1,200 @@
+<%- include('./Partials/chore.ejs') -%>  
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+  *,*::before,*::after
+  {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+  }
+  .template
+  {
+    /*background-color:#b88700;*/
+    background-image: url("/images/background.jpg");
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ql-video
+  {
+    display: block;
+    margin:auto;
+    width:30vw;
+    height:40vh;
+  }
+  .template-note::first-line , .template-links::first-line, #editor_text::first-line, .template-summary::first-line
+  {
+    text-align: center;
+  }
+  .heading {
+    color: white;
+  }
+  .template-heading
+  {
+    text-align:center;
+    text-shadow: 1px 1px red;
+    font-size:5em;
+    margin-bottom: 0;
+    padding:25px 0;
+    min-height:20vh;
+    color:#fff;
+  }
+ 
+  #editor_text
+  {
+    padding:0 100px;
+    font-family: 'Montserrat', sans-serif;
+    margin:0;
+    color:#fff;
+    margin-bottom: 0;
+    padding:25px 15px;
+    min-height: 20vh;
+    width: 80%;
+  }
+  #editor_text img
+  {
+    display:block;
+    margin:0 auto;
+  }
+  #editor_text video
+  {
+    display: block;
+    margin: 0 auto;
+    }
+    .template-links
+    {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      margin-top:0px;
+      margin-bottom: 0px;
+      min-height: 17vh;
+      padding: 25px 0;
+    }
+    .template-links a
+    {
+      display: inline-block;
+      width:150px;
+      margin:0 auto;
+    }
+  .template-summary
+  {
+
+    margin:0;
+    min-height: 17.8vh;
+  }
+  .template-note
+  {
+
+    font-size:1.4rem;
+    margin: 0;
+    padding:25px 50px;
+    color:#fff;
+  }
+  .template-footer
+  {
+
+    padding:15px 0;
+
+  }
+  .template-video
+  {
+    width: 50vw;
+    height:100vh;
+    display: block;
+    margin:0 auto;
+  }
+</style>
+<div class="container">
+ 
+  <!-- Role=model brings out focus to this on click of above button, fade is just for transition, role="dialog" for screen readers only -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-head  er">
+          <h2 class="text-center"> Ask your query here</h2>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/query">
+            <label for="name" class="mt-2">Name</label>
+            <input
+              class="form-control"
+              name="name"
+              placeholder="Enter your name"
+            />
+            <label for="email" class="mt-2">Email</label>
+            <input
+              class="form-control"
+              name="email"
+              placeholder="Enter your mail"
+            />
+            <label for="query" class="mt-2">Query</label>
+            <textarea
+              name="query"
+              class="form-control"
+              placeholder="Enter your query"
+              rows="5"
+              cols="50"
+            >
+            </textarea>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="template">
+  <h1 class="display-2 template-heading text-center font-weight-bold"><%=lecture_title%></h1>
+  <div id="editor_text" class="manage-text"></div>
+  <div class="template-links container">
+  <% var link = "" %>
+  <% var name = "" %>
+  <% var k=0 %>
+  <div class="row">
+  <% for(var i=0;i<src.length;i++) {%>
+    <div class="col-sm-6">
+    <% link = link + src[i] %>
+     <% if(src[i]===',' || i===src.length-1) {%>
+       <% if(link[link.length-1]===',') { %>
+        <% link = link.slice(0, -1); %>
+       <%}%>
+       <% k++ %>
+       <% name = "link-" + k %>
+       <a href="<%= link %>" class="btn btn-primary text-center d-flex align-items-center justify-content-center"><%= name %></a>
+       <% name = "" %>
+       <% link="" %>  
+     <% } %>
+    </div>
+  <% } %>
+</div>
+ 
+</div>
+  <p class="template-summary"><%=reso%></p>
+  <p class="template-note text-capitalize"><%=note%></p>
+
+<div class="text-center template-footer">
+<button type="button" class="btn btn-primary btn-lg doubt-button" data-toggle="modal" data-target="#myModal">Ask your doubt here</button>
+<% for(j=0;j<model_name.length;j++){ %>
+  <% var temp = model_name[j] %>
+  <% var ch = temp.substring(0,4) %>
+  <% if(ch==="http"){%>
+    <a class="btn btn-lg btn-primary" href="<%= model_name[j] %>" target="_blank"><%= model_name[j] %></a>
+  <%} else {%>
+    <% route = "/model/" + model_name[j] %>
+    <a class="btn btn-lg btn-primary" href="<%= route %>"><%= model_name[j] %></a>
+  <%}%>
+<% }%> 
+</div>
+</div>
+<script>
+  window.onload = function () {
+    var lecture_para_content = "<%- lecture_para %>"
+    var display_editor = document.getElementById("editor_text");
+    display_editor.innerHTML = lecture_para_content;
+  };
+</script>
+</body>
+</html>
