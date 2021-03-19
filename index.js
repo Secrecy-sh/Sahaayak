@@ -6,9 +6,20 @@ const bcrypt=require('bcrypt');
 const path = require('path');
 const app = express();
 const logger = require('morgan')
-//* Mongo Db Model for Instructor
-var mailer=require('nodemailer');
+var isInstructorAuthenticated = false;
+var InstructorMail = '';
+const query  = require("./models/query");
+const lectureNote = require('./models/LectureDetails');
 const instructorModel = require('./models/InstructorDetails');
+const multer=require('multer');
+const request = require('request');
+const fs =  require('fs')
+
+var isInstructorAuthenticated = false;
+var InstructorMail = '';
+var mailer = require('nodemailer');
+var threeModelsArray = []
+
 app.use(bodyParser.json({ limit: '10mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json());
@@ -52,6 +63,7 @@ app.post('/admin-login', (req, res, next) => {
       res.render('admin-login', {auth:false});
     }
 });
+
 
 app.post('/admin-login', (req, res, next) => {
     var adminEmail = req.body.usremail;
@@ -127,6 +139,47 @@ app.get('/sign-in', (req, res) => {
     res.render('sign-in', {auth:true});
 });
 
+app.post('/sign-in', async (req, resp, next) => {
+  var usrEmail = req.body.usremail;
+  var temp;
+  //* Instructor Model is basically a model 
+  temp = await instructorModel
+    .find({ email: usrEmail })
+    .then(async (doc) => {
+      if(doc.length !=0){
+      var ob1;
+      ob1 = await bcrypt.compare(
+        req.body.usrpsw,
+        doc[0].password,
+        (err, res) => {
+          if (err) {
+            resp.render('sign-in', {auth: false});
+            console.error(err);
+            return;
+          }
+          
+          InstructorMail = req.body.usremail;
+          isInstructorAuthenticated = res;
+          if(res){
+          resp.redirect("/dashboard")
+          }
+          else{
+          resp.render('sign-in', {auth: false});
+          }
+        }
+      );
+      }else{
+        resp.render('sign-in', {auth: false});
+      }
+    })
+    .catch((err) => {
+      console.log('error finding user', err);
+    });
+});
+
+app.get("/dashboard/generate",(req,res)=>{
+  res.render('Generator',{action:"notdone"});
+})
 
 //* Adding Code for Post request for Dashboard
 var currentLectureId = "dNOJPz";
@@ -198,6 +251,53 @@ app.post('/dashboard/generate',async (req, res, next) => {
       console.log('error occur', err);
     });
 });
+
+app.get("/dashboard/generate/add-model",async (req,resp)=>{
+  var model__array = [];
+    await request('https://console.echoar.xyz/query?key=holy-dust-4782', { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    var id = Object.values(body.db)
+    console.log(id.length)
+    id.map((data)=>{ model__array.push({model__url: data.additionalData.shortURL, model__name:data.hologram.filename.split('.').slice(0, -1).join('.')})})
+    model__array.map((data)=>console.log(data))
+    const directoryname=__dirname+'/public/assets/models/glb';
+    console.log(directoryname);
+    fs.readdir(directoryname,async (err,files)=>{
+      if(err){
+        console.log('Error finding the directory')
+        resp.render('notfound',{})
+      }else{
+        files.map((file)=>{
+          var value=file;
+          threeModelsArray.push(value.split('.').slice(0, -1).join('.'));
+          console.log(value);
+        })
+    console.log(threeModelsArray)
+    resp.render("models",{lecture_id: currentLectureId, model:model__array, three__models: threeModelsArray})
+    threeModelsArray.splice(0,threeModelsArray.length)
+      }
+    });
+    // console.log(threeModelsArray)
+    // resp.render("models",{lecture_id: currentLectureId, model:model__array, three__models: threeModelsArray})
+    // threeModelsArray.splice(0,threeModelsArray.length)
+  });
+  console.log(model__array)
+});
+
+
+
+app.post("/dashboard/generate/add-model",async (req,res)=>{
+  console.log(req.body);
+  const filter = {lecture_id: req.body.lecture_id}
+  const update = {model: req.body.models_array}
+  console.log(update)
+  var updatedData = await lectureNote.findOneAndUpdate(filter, update, {
+    new: true
+  });
+  console.log(updatedData);
+
+})
+
 // get request for providing all lecture information
 app.get("/all-lecture",(req,res)=>{
   lectureNote.find().then( async (doc)=>{
