@@ -56,10 +56,10 @@
     <div class="row">
       <% for(var i=0;i<length;i++) {%>
 
-        <% var src="https://techar-websystem.herokuapp.com/lecture/" + doc[i].lecture_id %>
+        <% var src="http://localhost:3000/lecture/" + doc[i].lecture_id %>
         <!-- below route are pending to be formed -->
-          <% var del_req="https://techar-websystem.herokuapp.com/dashboard/del/" +doc[i].lecture_id %>
-            <% var edit="https://techar-websystem.herokuapp.com/dashboard/edit/" +doc[i].lecture_id %>
+          <% var del_req="http://localhost:3000/dashboard/del/" +doc[i].lecture_id %>
+            <% var edit="http://localhost:3000/dashboard/edit/" +doc[i].lecture_id %>
               <!-- <h1><%= src %></h1> -->
               <div class="col-md-4">
                 <div class="card stylecard mt-3">

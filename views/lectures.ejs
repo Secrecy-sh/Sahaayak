@@ -1,0 +1,119 @@
+<%- include('./Partials/header.ejs') %>
+<link rel="stylesheet" href="css/lectures.css">
+<div class=" d-flex justify-content-center align-items-center text-center align-search">
+      <input class="form-control input__search"   type="search" placeholder="Search"  aria-label="Search" id="search_bar" onkeyup="search()">
+    </div>
+<div class="all-lecture">
+
+<div class="lecture__cards">
+<div class=" colorContainer" id="all_articles">
+<% for(i=0;i<length-1;i++) {%>
+    <div class="heading text-center font-weight-bolder display-4">
+      <% if(i==0){ %> 
+      <h1 class="text-capitalize extra__margin" id="<%= lectureArray[i][0].subject_name %>"> <%= lectureArray[i][0].subject_name %></h1>
+      <% }else{ %>
+        <h1 class="text-capitalize " id="<%= lectureArray[i][0].subject_name %>"> <%= lectureArray[i][0].subject_name %></h1>
+      <%} %>
+     </div> 
+     <% var value="" %>
+     <% value=checksubject(lectureArray[i][0].subject_name) %>
+    <div class="container-cards" >
+      <div class="row text-center">
+       <% for(let j=0;j<lectureArray[i].length;j++) {%>
+        <% if(lectureArray[i]!=='undefined' && lectureArray[i][0]!=='undefined'){ %>
+          <% var src = "http://localhost:3000/lecture/" + lectureArray[i][j].lecture_id %>
+
+        <form method="GET" action="<%= src %>">
+                     <div class="col-md-4">
+                     <div class="card stylecard mt-3 mycard">
+
+                      <div class="view overlay">
+                       <% if(value===""){ %>
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo9.jpg" alt="Card image cap">
+                          <% } else { %>
+                              <% let source="Images/${value}.jpg" %>
+                              
+                          <img class="card-img-top" src=<%= `Images/${value}.jpg` %> alt="Card image cap">
+                          <% } %>
+                        <a>
+                          <div class="mask rgba-white-slight"></div>
+                        </a>
+                      </div>
+                    
+                    
+                      <!-- Card content -->
+                      <div class="card-body">
+                    
+                        
+                        <div class=" article-heading">
+                        <h3 class="card-title cardtitle"><%= lectureArray[i][j].title %></h4>
+                        </div>
+                        <hr>
+                        
+                        <p class="card-text set-width"><%= lectureArray[i][j].additional_note.substring(0,Math.min(101,lectureArray[i][j].additional_note.length)) %></p>
+                        <div class="text-center">
+                        
+                        <a href=<%= src %> type="button" class="btn btn-rounded btn-md btn-primary text-center">See Whole Lecture</a>
+                      </div>
+                      </div>
+                    </div>
+  
+        </div>
+         </form>
+         <% } %> 
+         <% } %>
+    </div>
+    </div>
+    <% } %>
+  </div>
+  </div>
+  
+  <div class="subject__tags">
+    <h1 class="text-center tag__head font-weight-bolder"> Search by tags</h1>
+    <% for(i=0;i<length-1;i++){ %>
+    <div class="tag">
+      <% towards = "#" + lectureArray[i][0].subject_name %>
+     <a href="<%= towards %>" class="text-capitalize font-weight-normal "><%= lectureArray[i][0].subject_name %></a>
+    </div>
+    <%}%>
+    </div>
+  </div>
+
+</body>
+<script>
+  let para=document.getElementsByClassName('card-text');
+  if(para.clientHeight>'0px')
+  {
+   para.style.overflowY='auto';
+   alert('1');
+  }
+  async function toggleClass()
+  {
+     document.getElementsByClassName('set-width').classList.toggle('clicked-ellipsis');
+  }
+  async function search()
+  {
+var input=document.getElementById("search_bar")
+var filter=input.value.toUpperCase()
+var main=document.getElementsByClassName('container-cards')
+//console.log(main)
+for(i=0;i<main.length;i++)
+{
+  var cards=main[i].getElementsByClassName('mycard')
+  for(k=0;k<cards.length;k++)
+  {
+    singlecard=cards[k]
+    var title=singlecard.getElementsByClassName('cardtitle')[0]
+    var txtvalue=title.textcontent||title.innerText
+    console.log(txtvalue)
+    if (txtvalue.toUpperCase().indexOf(filter) > -1) {
+      singlecard.style.display = "";
+  } else {
+    singlecard.style.display = "none";
+  }
+  }
+  
+}
+  }
+</script>
+</html>

@@ -198,6 +198,38 @@ app.post('/dashboard/generate',async (req, res, next) => {
       console.log('error occur', err);
     });
 });
+// get request for providing all lecture information
+app.get("/all-lecture",(req,res)=>{
+  lectureNote.find().then( async (doc)=>{
+    let i=0;
+    await doc.map((data,key)=>{
+      if(data.subject_name != null)
+      data.subject_name = data.subject_name.toLowerCase();
+      
+    })
+    // await doc.filter(redundantLectures);
+    let finalDoc = doc.filter(function(e){
+      return e.subject_name!=null 
+    })
+    finalDoc.sort(dynamicSort("subject_name"))
+    
+    var arrlen =0 ;
+    for(var j=0;j<finalDoc.length-1;j++){
+      if(finalDoc[j].subject_name != finalDoc[j+1].subject_name){
+        arrlen++;
+      }
+    } 
+  
+    var arr = new Array(arrlen+1);
+    for(let i=0;i<(arrlen+1);i++){
+      arr[i] =[];
+    }
+    arrlen =0 ;
+     arr=convertTo2d(finalDoc)
+     
+     res.render('lectures',{lectureArray:arr, length:arr.length,mail: null,checksubject:checksubject})
+  }).catch((err)=>console.log("error finding records",err))
+});
 
 //* Adding Code for Get Request for Dashboard
 app.get('/dashboard', (req, res) => {
