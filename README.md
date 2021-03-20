@@ -2,8 +2,8 @@
 <div class="reason container">
     <h1 class="text-center text-capitalize display-3">Why this ? &#129300;</h1>
    <h3 class="mt-3"> Hi all &#128075;</h3>
-   <h2>About techAr</h2>
-   <p>TechAr is an online platform developed by two students of IIIT Vadodara which is enabled with certain features and valuable propects to improvise
+   <h2>About Sahaayak</h2>
+   <p>Sahaayak is an online platform developed by two students of IIIT Vadodara which is enabled with certain features and valuable propects to improvise
       the traditional as well as virtual learning mode of education. This platform performs certain tasks, Some of them are listed below:
       <ul style="font-size:15px;">
           <li>
