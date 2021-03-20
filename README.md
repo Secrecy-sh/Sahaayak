@@ -57,7 +57,7 @@
         <p><strong>Solution</strong>We have given a doubt asking feature along with each lecture,through this when a student asks a doubt , A <strong>Mail</strong> will be sent to respected teacher.</p>
     </div>
     <div>
-     <h1>Open source contribution</h1>
+     <h3>Open source contribution</h3>
      <p><strong>Problem:</strong>As we encountered that finding good 3d models is quite an hectic task</p>
      <p><strong>Solution:</strong>We had enabled a open source contribution feature so that any developer/people can come to this website and donate 3d models to this webapp for eductaional use of it </p>
     </div>
