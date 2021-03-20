@@ -56,7 +56,7 @@
     <div class="row">
       <% for(var i=0;i<length;i++) {%>
 
-        <% var src="http://localhost:3000/lecture/" + doc[i].lecture_id %>
+        <% var src="http://localhost:3000/instructor/lecture/" + doc[i].lecture_id %>
         <!-- below route are pending to be formed -->
           <% var del_req="http://localhost:3000/dashboard/del/" +doc[i].lecture_id %>
             <% var edit="http://localhost:3000/dashboard/edit/" +doc[i].lecture_id %>

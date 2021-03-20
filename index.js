@@ -426,7 +426,32 @@ app.get('/lecture/:id', (req, res, next) => {
     })
     .catch((err) => console.log('error aagayi bhai',err));
 });
-  
+
+app.get('/instructor/lecture/:id', (req, res, next) => {
+  // i = i+1;
+  // console.log(i)
+  lectureNote
+    .find({ lecture_id: req.params.id })
+    .then((doc) => {
+      console.log(doc)
+      insdbtmail = doc[0].InsEmail;
+      lecture_id = doc[0].lecture_id;
+      var arr = [];
+      res.render('instructorlecture', {
+        lecture_title: doc[0].title,
+        lecture_para: doc[0].para.replace(/["]+/g, "'"),
+        note: doc[0].additional_note,
+        src: doc[0].video_link,
+        reso: doc[0].resources,
+        id: doc[0].lecture_id,
+        model_name: doc[0].model
+        // models_length: Object.keys(arr).length
+
+      });
+    })
+    .catch((err) => console.log('error aagayi bhai',err));
+});
+
   app.get("/dashboard/generate/add-model",async (req,resp)=>{
     var model__array = [];
       await request('https://console.echoar.xyz/query?key=holy-dust-4782', { json: true }, (err, res, body) => {
