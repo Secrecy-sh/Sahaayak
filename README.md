@@ -59,7 +59,7 @@
     <div>
      <h1>Open source contribution</h1>
      <p><strong>Problem:</strong>As we encountered that finding good 3d models is quite an hectic task</p>
-     <p><strong>Solution:</stong>We had enabled a open source contribution feature so that any developer/people can come to this website and donate 3d models to this webapp for eductaional use of it </p>
+     <p><strong>Solution:</strong>We had enabled a open source contribution feature so that any developer/people can come to this website and donate 3d models to this webapp for eductaional use of it </p>
     </div>
 </div>
 </body>
