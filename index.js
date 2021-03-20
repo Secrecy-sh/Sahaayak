@@ -141,6 +141,18 @@ app.get('/sign-in', (req, res) => {
     res.render('sign-in', {auth:true});
 });
 
+app.get('/contribute',(req,res)=>{
+  res.render('contribute',{});
+})
+
+app.get('/',(req,res)=>{
+  res.render('frontpage',{});
+})
+
+app.post('/contribute',upload.single('modelTesting'),(req,res)=>{
+  res.render('thankyou',{})
+})
+
 //Adding in last ,so that it runs if we don't have given that path or some other file, req.params.id gives basically path ,i.e. after /
 app.get("/model/:id",(req,res)=>{
   if(req.params.id!="null")

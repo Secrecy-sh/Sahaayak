@@ -1,0 +1,9 @@
+.contribution__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-image:url('/images/bg8.jpg');
+    color: white;
+}
