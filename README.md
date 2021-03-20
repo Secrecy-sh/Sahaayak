@@ -54,7 +54,12 @@
     <div >
         <h3>Doubt Asking feature</h3>
         <p><strong>Problem:</strong>Some students are shy to ask doubts in the running class,further some students might live in a very noisy area, due to this when they ask doubt all other students of a class gets distubred.</p>
-        <p><strong>Problem:</strong>We have given a doubt asking feature along with each lecture,through this when a student asks a doubt , A <strong>Mail</strong> will be sent to respected teacher.</p>
+        <p><strong>Solution</strong>We have given a doubt asking feature along with each lecture,through this when a student asks a doubt , A <strong>Mail</strong> will be sent to respected teacher.</p>
+    </div>
+    <div>
+     <h1>Open source contribution</h1>
+     <p><strong>Problem:</strong>As we encountered that finding good 3d models is quite an hectic task</p>
+     <p><strong>Solution:</stong>We had enabled a open source contribution feature so that any developer/people can come to this website and donate 3d models to this webapp for eductaional use of it </p>
     </div>
 </div>
 </body>
