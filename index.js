@@ -137,7 +137,6 @@ return "";
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// setted get request for testing if pages are rendering properly or not 
 app.get('/sign-in', (req, res) => {
     res.render('sign-in', {auth:true});
 });
@@ -198,7 +197,7 @@ app.get("/dashboard/generate",(req,res)=>{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // this will lecture forming request
 // fortestin purpose you can use below lecture id 
-var currentLectureId = "dNOJPz";
+var currentLectureId = "";
 // var currentLectureId = "";
 app.post('/dashboard/generate',async (req, res, next) => {
 
@@ -486,7 +485,30 @@ app.get("/success",(req,res)=>{
 })
 
 //this route will handle all delete request
+app.get("/dashboard/del/:id",(req,res,next)=>{
+  lectureNote.remove({lecture_id:req.params.id}, function(err, result) {
+    if (err) {
+      console.err(err);
+    } else {
+      res.redirect('/dashboard')
+      // redirect to all lecture route when using webui to delete cards fastly
+    }
+  });
+})
+
 //handling query delete request 
+app.get("/dashboard/:id",(req,res)=>{
+  query.remove({query_id:req.params.id}, function(err, result) {
+    if (err) {
+      console.err(err);
+    } else {
+      res.redirect('/dashboard')
+      // redirect to all lecture route when using webui to delete cards fastly
+    }
+  });
+})
+
+
 
 //handing doubt request 
 app.post("/query",async (req,res)=>{
@@ -538,6 +560,35 @@ app.post("/query",async (req,res)=>{
 });
 
 //below routes handle updating lecture feature
+app.get("/dashboard/edit/:id",(req,res,next)=>{
+  lectureNote.find({lecture_id:req.params.id}).then((value)=>{
+    console.log("ye data hai",value)
+    value[0].quillDelta = ""
+    res.render('edit_generator',{value:value});
+  }).catch((err)=>{
+    console.log(err);
+  })
+  
+});
+
+app.post("/edit/:id",async (req,res,next)=>{
+  console.log(req.body);
+  const filter = {lecture_id: req.params.id}
+  const update = {
+    InsEmail: req.body.Insemail,
+    title: req.body.ltitle,
+    para : req.body.value,
+    additional_note: req.body.note,
+    video_link: req.body.video_url,
+    subject_name: req.body.subject_name
+    // model: req.body.model
+  }
+  console.log(update)
+  var updatedData = await lectureNote.findOneAndUpdate(filter, update, {
+    new: true
+  });
+  console.log("ye updated data hai",updatedData);
+})
 
 
 app.get("/customodel/:id",(req,res)=>{
