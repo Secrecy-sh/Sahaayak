@@ -1,6 +1,3 @@
-<%- include('./Partials/header.ejs') %>
-<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-
 <link rel="stylesheet" href="css/about.css">
 <div class="reason container">
     <h1 class="text-center text-capitalize display-3">Why this ? &#129300;</h1>
@@ -60,18 +57,5 @@
         <p><strong>Problem:</strong>We have given a doubt asking feature along with each lecture,through this when a student asks a doubt , A <strong>Mail</strong> will be sent to respected teacher.</p>
     </div>
 </div>
-<div class="usage container">
-    <h1 class=" display-3 text-capitalize text-center">How to use</h1>
-    <p> A video is attached below which briefly shows how the website works</p>
-    <video controls class="usage-video">
-        <source src="videos/Usage.mp4" type="video/mp4">
-            Your browser does not support video tag
-    </video>
-</div>
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
 </body>
 </html>
