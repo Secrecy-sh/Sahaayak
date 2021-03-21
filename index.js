@@ -3,6 +3,7 @@ const express = require('express');
 const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 // Path module is used whenever working with Directories and Files
 const path = require('path')
 const lectureNote = require('./models/LectureDetails');
@@ -56,7 +57,7 @@ var upload=multer({
 
 // connecting out map with mongodb atlas 
 mongoose
-  .connect('mongodb+srv://creator:nnNN@@22@cluster0.bkrcv.mongodb.net/Images', {
+  .connect(process.env.mongooseuri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -503,7 +504,7 @@ app.post('/admin-login', (req, res, next) => {
     var adminEmail = req.body.usremail;
     var adminPassword = req.body.usrpsw;
     console.log(req.body)
-    if (adminEmail === 'nlok5923@gmail.com' && adminPassword === '123') {
+    if (adminEmail === process.env.adminmail && adminPassword === process.env.adminpassword) {
       res.render('admin-panel', {});
     } else {
     //   var userVerified = false;
