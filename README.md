@@ -10,7 +10,7 @@
                 An Institute can setup an admin to take overall power to maintain a web system.
           </li>
           <li>
-              An Instructor can register himself via admin assist and will be mailed with proper credentials once registered.
+              An Instructor can register himself via admin assist and once its done,he will be mailed with proper credentials once registered.
           </li>
           <li>
               Instructor can add lectures included with videos ,3D models, images or any element or resource which can be used for Rich text formatting can be used by instructor.
