@@ -7,7 +7,7 @@
       the traditional as well as virtual learning mode of education. This platform performs certain tasks, Some of them are listed below:
       <ul style="font-size:15px;">
           <li>
-                An Institute can setup an admin to take overall power to maintain a web system.
+                
           </li>
           <li>
               An Instructor can register himself via admin assist and will be mailed with proper credentials once registered.
