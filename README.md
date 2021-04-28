@@ -66,14 +66,24 @@
 </html>
 
 ### Glimpses:
+- Home page of sahaayak where user land initially.
 ![image](images/home.png)
+- Dashboard page where instructor can create lectures.  
 ![image](images/dashboard.png)
+- Page to create lecture. 
 ![image](images/createlecture.png)
+- Admin page to add instructors.
 ![image](images/addinstructor.png)
+- Simple signin page.
 ![image](images/signin.png)
+- Page to select 3d models for integrating the same to lecture.
 ![image](images/selectmodels.png)
+- Rendering 3d models using three.js platform
 ![image](images/three.png)
+- Rendering 3d models fetched from echoar cloud platform.
 ![image](images/echoar.png)
+- Opensource contribution for donating 3d models for educational purpose.
 ![image](images/contribute.png)
+- Whyus page to says how to use this website.
 ![image](images/whyus.png)
 
