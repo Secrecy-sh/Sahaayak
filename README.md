@@ -64,3 +64,16 @@
 </div>
 </body>
 </html>
+
+### Glimpses:
+![image](images/home.png)
+![image](images/dashboard.png)
+![image](images/createlecture.png)
+![image](images/addinstructor.png)
+![image](images/signin.png)
+![image](images/selectmodels.png)
+![image](images/three.png)
+![image](images/echoar.png)
+![image](images/contribute.png)
+![image](images/whyus.png)
+
